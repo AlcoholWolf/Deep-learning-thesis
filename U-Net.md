@@ -9,49 +9,48 @@
 
 > ## 선결 과제
 > * 첫번째 선결 과제 : 
-> * * 일반적인 사용은 "분류작업" 에 있다.
-> * * "첫번째 선결 과제" 에서의 이미지에 대한 Return은 단일 클래스 Label이다.
-> * * Localization가 포함된 단일 이미지 Label이어야 한다.
+> * * 일반적인 사용은 "분류작업"
+> * * 이미지에 대한 Return은 Localization가 포함된 단일 Imag-Class-Label
 > * 두번쨰 선결 과제 :
-> * * "#첫번째 선결 과제"에서 처리한 개체 중 동일한 클래스의 접촉 객체 분리
+> * * 처리한 개체 중 동일한 클래스의 접촉 객체 분리
 > * * 첫번쨰 과제에서 분리 한 객체 중 2개의 같은 객체가 서로 붙어있어, 한 객체로 취급된 경우 각각 다른 개체로 인식하기 위함
 > * * 편의 상 "접촉한 하나의 클래스를 가진 여러 객체" 를 객체(ᚋ ᚌ ᚍ ᚎ ᚏ)라고 부르겟습니다.
 
 > ### 해결 :
 > * "Ciresan" 외 Slide-Pixel 설정에서 Net을 훈련 시킨 후 해당 Pixel 주변의 Local Region을 제공하여 Pixel의 Class-Label을 예측
-> * 객체(ᚋ) 의 분리를 진행하기 위해 BackGraund-Label의 손실 함수 중 가장 큰 가중치를 가진 함수의 사용을 제안합니다.(권장사항)
+> * 객체(ᚋ) 의 분리를 진행하기 위해 BackGraund-Label의 손실 함수 중 가장 큰 가중치를 가진 함수의 사용을 제안(권장사항)
 
 
 > ### 장점 : 
-> * N-Net는 Localization이 가능하다.
-> * * Localization로 각 Layer를 규격화하여 쉽게 쌓을수(수정할수)있다.
-> * Patch 측면에서 Train-Datas가 Train-Imgs보다 훨씬 크다.
-> * * 학습할때 더 정확한 결과를 낼 수 있다.
+> * N-Net는 Localization 가능
+> * * Localization로 각 Layer를 규격화하여 쉽게 쌓을수(수정할수)있음
+> * Patch 측면에서 Train-Datas가 Train-Imgs보다 훨씬 큼
+> * * 학습시 더 정확한 결과 도출
 
 
 > ### 단점 :
-> * 패치별로 따로따로 훈련 네트워크를 진행해야 한다.
+> * 패치별로 따로 훈련 네트워크를 진행해야 함
 > * * 패치가 중복되는 경우가 많아서 속도가 상당히 느림
-> * Localization Accuracy와 Context 가 반비례한다.
-> * * Localization Accuracy를 올리기 위해 Path를 줄이면 Context를 거의 볼 수가 없고,
-> * * Context를 보기 위해 Patches를 키우면 지역화 정확도가 줄어든다.
-> * * 즉 두가지 Return을 만족하는 적절한 PatchSize를 찾아야 한다.
-> * 최근에는 여러 계층의 특징을 고려한 분류 출력을 제안함.
-> * * 양호한 Localization Accuracy와 ConText 사용이 가능함.
+> * Localization Accuracy와 Context(해상도) 가 반비례함
+> * * Localization Accuracy를 올리기 위해 Path를 줄이면 Context를 거의 볼 수가 없음
+> * * Context를 보기 위해 Patches를 키우면 Localization Accuracy가 줄어들음
+> * * 즉 두가지 Return을 만족하는 적절한 PatchSize를 찾아야 함
+> * 최근에는 여러 계층의 특징을 고려한 분류 출력을 제안
+> * * 양호한 Localization Accuracy와 ConText 사용이 가능
 
 
 > ### 설명 : 
-> * 해당 논문에서 "Fully Convolutional Network" 라는 보다 우아한 Architecture를 기반으로 한다.
-> * * 보다 적은 수의 Valid-Imgs로, 보다 정확한 Localization를 산출한다.
-> * * 주요 아이디어는 Pulling 연산자가 UpSampleing 연산자로 대체되는 연속적인 Layer로 Network를 보완하는것.
-> * * 이 Layer들은 Return의 해상도를 증가시킨다.
+> * 해당 논문에서 "Fully Convolutional Network" 라는 보다 우아한 Architecture를 기반
+> * * 보다 적은 수의 Valid-Imgs로, 보다 정확한 Localization를 산출
+> * * 주요 아이디어는 Pulling 연산자가 UpSampleing 연산자로 대체되는 연속적인 Layer로 Network를 보완
+> * * 해당 Layer들은 Return의 해상도를 증가
 
 
 > ### 출력 : 
-> * U-Net에서 중요한 점은 UpSampling에서 많은 수의 피쳐 채널이 있어, 네트워크가 Context정보를 고해상도 Layer로 전파할수 있다는 점.
-> * * 확장 경로는 수축 경로와 대칭적인 U자형 구조를 산출함.
-> * * Localization Layer는 각 Convolutional Network의 유효한 부분의 픽셀만 포함하여 사용한다.
-> * * 이미지의 테두리 영역에서 픽셀을 예측하기 위해 입력 이미지를 미러링하여 누락된 Context를 출력합니다.
+> * U-Net에서 중요한 점은 UpSampling에서 많은 수의 피쳐 채널이 있어, 네트워크가 Context정보를 고해상도 Layer로 전파할수 있음
+> * * 확장 경로는 수축 경로와 대칭적인 U자형 구조를 산출
+> * * Localization Layer는 각 Convolutional Network의 유효한 부분의 픽셀만 포함하여 사용
+> * * 이미지의 테두리 영역에서 픽셀을 예측하기 위해 입력 이미지를 미러링하여 누락된 Context를 출력
 
 ------------------------------------------------------------------------------------------------------------------------
 
