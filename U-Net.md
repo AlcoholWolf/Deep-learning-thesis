@@ -1,5 +1,5 @@
 # U-Net : Convolutional Networks for Biomedical Image Segmentation
-* 리뷰 저자 : 최현우 / 논문 저자 : Computer Science Department of the University of Freiburg
+* 리뷰 저자 : 최현우[A.W.] / 논문 저자 : Computer Science Department of the University of Freiburg
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 주 목적 : 
