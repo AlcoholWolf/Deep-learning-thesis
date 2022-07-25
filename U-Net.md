@@ -1,5 +1,5 @@
 # U-Net : Convolutional Networks for Biomedical Image Segmentation
-
+* 리뷰 저자 : 최현우 / 논문 저자 : Computer Science Department of the University of Freiburg
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 주 목적 : 
@@ -72,6 +72,7 @@
 ------------------------------------------------------------------------------------------------------------------------
 > * PDF Link : https://drive.google.com/drive/folders/1KlDXgiaoTtIhrl6qW0rS-HrWHf-dOJNl?usp=sharing
 > * 참고한 논문 리뷰 : https://medium.com/@msmapark2/u-net-%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0-u-net-convolutional-networks-for-biomedical-image-segmentation-456d6901b28a
+> * 추가 설명 : https://www.quantumdl.com/entry/%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9D%84-%EC%9C%84%ED%95%9C-Atrous-Convolution%EA%B3%BC-UNet-%EA%B5%AC%EC%A1%B0-%EA%B0%84%EB%9E%B5%ED%95%9C-%EC%97%AD%EC%82%AC
 > * * 한국어 번역본은 Naver의 Papago로 번역한 것임을 밝힙니다.
 > * * 해당 번역본은 오번역이 있을수 있으므로 원본 논문과 비교해가며 읽는걸 추천합니다.
 > * * 함수 관련 부분은 제가 더 리뷰하거나 요약할 부분 없이 논문 그 자체로 깔끔하기에, 이상으로 리뷰를 마칩니다.
